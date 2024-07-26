@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'weather/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Weather App</h1>
+        <form method="get" class="search-form">
+            <input type="text" name="city" value="{{ city }}" placeholder="Enter city" class="input-field">
+            <button type="submit" class="search-button">Get Weather</button>
+        </form>
+        
+        {% if weather_data %}
+            <div class="weather-info">
+                <h2 class="city-name">{{ city }}</h2>
+                <p class="weather-description">{{ weather_data.weather.0.description|title }}</p>
+                <p class="temperature">{{ weather_data.main.temp }}°C</p>
+                <p class="humidity">Humidity: {{ weather_data.main.humidity }}%</p>
+                <p class="wind-speed">Wind Speed: {{ weather_data.wind.speed }} m/s</p>
+            </div>
+        {% else %}
+            <p class="error-message">No weather data available.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
